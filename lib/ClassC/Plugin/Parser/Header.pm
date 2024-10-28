@@ -21,6 +21,7 @@ use ClassC::Plugin::Parser::Util qw(
     bad_chars
     format_parsing_error
     parse
+    starts_with
     store_until
     tokens
 );
@@ -204,6 +205,10 @@ sub __parse_field {
   $logger->trace('>>> Parsing field');
   my ($line) = @_;
   my ($type, $name) = parse($line, $FIELD_TOKENS);
+  if (starts_with($name, '*')) {
+    $type = "$type *";
+    $name = substr($name, 1);
+  }
   return ClassC::Core::OOP::Field->new(
     id   => ClassC::Core::OOP::Field::FIELD(),
     type => $type,
@@ -215,6 +220,10 @@ sub __parse_method {
   $logger->trace('>>> Parsing method');
   my ($line) = @_;
   my ($return_type, $name, $arguments) = parse($line, $METHOD_TOKENS);
+  if (starts_with($name, '*')) {
+    $return_type = "$return_type *";
+    $name        = substr($name, 1);
+  }
   return ClassC::Core::OOP::Method->new(
     id          => ClassC::Core::OOP::Method::METHOD(),
     return_type => $return_type,

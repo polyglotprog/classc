@@ -13,9 +13,11 @@ require Exporter;
 our @ISA    = qw(Exporter);
 our @EXPORT = qw(
     bad_chars
+    ends_with
     format_parsing_error
     parse
     skip_until
+    starts_with
     store_until
     tokens
 );
@@ -24,6 +26,11 @@ sub bad_chars {
   my ($line, $index) = @_;
   substr($line, $index) =~ m/(\S+)/g;
   return $1;
+}
+
+sub ends_with {
+  my ($string, $chars) = @_;
+  return substr($string, -length($chars)) eq $chars;
 }
 
 sub format_parsing_error {
@@ -73,6 +80,11 @@ sub parse {
 sub skip_until {
   my ($string, $input, $line) = @_;
   pop @{ store_until($string, $input, [], $line) };
+}
+
+sub starts_with {
+  my ($string, $chars) = @_;
+  return substr($string, 0, length($chars)) eq $chars;
 }
 
 # Read lines from $input, storing them in array @$lines, until $string is

@@ -2,6 +2,7 @@ package ClassC::Plugin::Writer::Header;
 
 use v5.38;
 use ClassC::Core::Logging::Logger;
+use ClassC::Plugin::Parser::Util;
 require ClassC::Core::OOP::Dependency;
 
 my $logger = ClassC::Core::Logging::Logger->new(level => TRACE);
@@ -89,7 +90,12 @@ sub __write_fields {
   $logger->trace(">>> Writing fields");
   my ($class) = @_;
   for my $field (@{ $class->{fields} }) {
-    say "  $field->{type} $field->{name};";
+    my $type = $field->{type};
+    if (ends_with($type, ' *')) {
+      say "  $type$field->{name};";
+    } else {
+      say "  $type $field->{name};";
+    }
   }
 }
 
@@ -97,7 +103,12 @@ sub __write_methods {
   $logger->trace(">>> Writing methods");
   my ($class) = @_;
   for my $method (@{ $class->{methods} }) {
-    say "  $method->{return_type} (*$method->{name})($method->{arguments});";
+    my $return_type = $method->{return_type};
+    if (ends_with($return_type, ' *')) {
+      say "  $method->{return_type}(*$method->{name})($method->{arguments});";
+    } else {
+      say "  $method->{return_type} (*$method->{name})($method->{arguments});";
+    }
   }
 }
 
@@ -106,8 +117,13 @@ sub __write_functions {
   my ($class, $class_name) = @_;
   say "\n/* Functions */";
   for my $method (@{ $class->{methods} }) {
+    my $return_type   = $method->{return_type};
     my $function_name = "${class_name}_$method->{name}";
-    say "$method->{return_type} $function_name($method->{arguments});";
+    if (ends_with($return_type, ' *')) {
+      say "$method->{return_type}$function_name($method->{arguments});";
+    } else {
+      say "$method->{return_type} $function_name($method->{arguments});";
+    }
   }
 }
 
