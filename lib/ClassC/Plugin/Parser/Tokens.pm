@@ -37,7 +37,7 @@ our $CLASS_TOKENS = tokens(
 
 our $FIELD_TOKENS = tokens(
   '^\\s*',
-  '(\\w+)',
+  '(\\w+\\*?)',
   '\\s+',
   '(\\*?\\w+)',
   '\\s*;',
@@ -46,7 +46,7 @@ our $FIELD_TOKENS = tokens(
 
 our $METHOD_TOKENS = tokens(
   '^\\s*',
-  '(\\w+)',
+  '(\\w+\\*?)',
   '\\s+',
   '(\\*?\\w+)',
   '\\(([\\w\\s\\*,]*)\\)',
