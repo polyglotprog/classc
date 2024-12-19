@@ -46,8 +46,8 @@ $ dzil perltidy
 
 # Features
 - [ ] Classes
-  - [ ] Fields
-  - [ ] Methods
+  - [x] Fields
+  - [x] Methods
   - [ ] Static Fields
   - [ ] Static Methods
 - [ ] Inheritance
