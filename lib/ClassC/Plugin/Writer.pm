@@ -34,6 +34,13 @@ sub __fields {
   ];
 }
 
+sub plug_in {
+  my ($self, $data) = @_;
+
+  # Must call write this way because it is apparently a pre-defined sub
+  return $self->write($data);
+}
+
 sub write {
   my ($self, $data) = @_;
   $data //= {};

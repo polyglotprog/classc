@@ -34,6 +34,10 @@ sub __fields {
   ];
 }
 
+sub plug_in {
+  return parse(@_);
+}
+
 sub parse {
   my ($self, $data) = @_;
   $data //= {};
