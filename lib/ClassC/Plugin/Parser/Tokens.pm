@@ -31,6 +31,7 @@ our $CLASS_TOKENS = tokens(
   'class',
   '\\s+',
   '(\\w+)',
+  '(\s*:\s*[\w\d\s]+)?',
   '\\s*(\\{)',
   '\\s*$',
 );
