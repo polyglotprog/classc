@@ -29,6 +29,7 @@ sub __fields {
     'full_name',
     'name',
     'dependencies',
+    'parents',
     'fields',
     'methods',
   ];

@@ -103,7 +103,18 @@ sub __parse_until_class_declaration {
       my $include = __parse_include($line);
       push @dependencies, $include;
     } elsif ($char eq 'c') {
-      ($class_name, my $brace) = __parse_class_declaration($line);
+      my (@parents, $parent_list, $brace);
+      ($class_name, $parent_list, $brace) = __parse_class_declaration($line);
+      $logger->warningf("parent_list: %s", $parent_list);
+      $logger->warningf("brace:       %s", $brace);
+      if ($parent_list eq '{') {
+        @parents = ();
+        $brace = '{';
+      } else {
+        $parent_list =~ s/\s*:\s*//;
+        @parents = map { $_ =~ s/^\s+|\s+$//gr } split /,\s*/, $parent_list;
+      }
+      $class->{parents} = \@parents;
       store_until('{', *STDIN, $lines, $line) if not defined $brace;
       last;
     } elsif ($char ne '') {
