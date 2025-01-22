@@ -5,6 +5,7 @@ use v5.38;
 use ClassC::Core::Logging::Logger;
 use ClassC::Core::Util qw(inspect);
 require ClassC::Plugin::Inheritance::None;
+require ClassC::Plugin::Inheritance::Single;
 
 my $logger = ClassC::Core::Logging::Logger->new(level => TRACE);
 

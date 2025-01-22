@@ -51,7 +51,7 @@ $ dzil perltidy
   - [ ] Static Fields
   - [ ] Static Methods
 - [ ] Inheritance
-  - [ ] Single Inheritance
+  - [x] Single Inheritance
   - [ ] Multiple Inheritance (Limited)
 - [ ] Polymorphism
   - [ ] Overridable Methods
