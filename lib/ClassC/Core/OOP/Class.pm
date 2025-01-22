@@ -24,6 +24,7 @@ sub __fields {
     # Field order used by `inspect` (see ClassC::Core::Util)
     'id',
     'description',
+    'resolved',
     'header_file',
     'source_file',
     'full_name',

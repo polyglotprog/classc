@@ -49,7 +49,7 @@ $ dzil perltidy
   - [x] Fields
   - [x] Methods
 - [ ] Inheritance
-  - [ ] Single Inheritance
+  - [x] Single Inheritance
   - [ ] Multiple Inheritance (Limited)
 - [ ] Polymorphism
   - [ ] Overridable Methods
