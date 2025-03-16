@@ -14,9 +14,11 @@ sub inspect {
   #<<< perltidy: ignore formatting
   return Data::Dumper
       ->new(\@_)
+      ->Deepcopy(1)
       ->Indent(1)
       ->Pad('    ')
       ->Sortkeys(\&__sortkeys)
+      ->Sparseseen(0)
       ->Terse(1)
       ->Dump();
   #>>>

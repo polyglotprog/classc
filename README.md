@@ -52,7 +52,7 @@ $ dzil perltidy
   - [x] Single Inheritance
   - [ ] Multiple Inheritance (Limited)
 - [ ] Polymorphism
-  - [ ] Overridable Methods
+  - [x] Overridable Methods
   - [ ] Virtual Methods
   - [ ] Interfaces
 - [ ] Encapsulation

@@ -16,6 +16,12 @@ sub new {
   my $class = shift;
   my %self  = (@_);
   set_id(\%self, $self{id} // UNKNOWN());
+  if (exists $self{fields}) {
+    $self{field_table} = {map { $_->{name} => $_ } @{$self{fields}}};
+  }
+  if (exists $self{methods}) {
+    $self{method_table} = {map { $_->{name} => $_ } @{$self{methods}}};
+  }
   return bless \%self, $class;
 }
 

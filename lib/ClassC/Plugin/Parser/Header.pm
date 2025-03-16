@@ -46,7 +46,7 @@ sub parse_header {
   my $name        = basename($full_name) =~ s/\.h$//gr;
 
   my $lines = [];
-  my $class = ClassC::Core::OOP::Class->new(
+  my $class = {
     id           => ClassC::Core::OOP::Class::CLASS(),
     header_file  => $header_file,
     source_file  => $source_file,
@@ -56,7 +56,7 @@ sub parse_header {
     dependencies => [],
     fields       => undef,
     methods      => undef,
-  );
+  };
 
   my $input;
   eval {
@@ -76,7 +76,7 @@ sub parse_header {
 
   close $input if $input;
 
-  return $class;
+  return ClassC::Core::OOP::Class->new(%$class);
 }
 
 sub __parse_class {
@@ -230,13 +230,14 @@ sub __parse_field {
 sub __parse_method {
   $logger->trace('>>> Parsing method');
   my ($line) = @_;
-  my ($return_type, $name, $arguments) = parse($line, $METHOD_TOKENS);
+  my ($return_type, $name, $arguments, $override) = parse($line, $METHOD_TOKENS);
   if (starts_with($name, '*')) {
     $return_type = "$return_type *";
     $name        = substr($name, 1);
   }
   return ClassC::Core::OOP::Method->new(
     id          => ClassC::Core::OOP::Method::METHOD(),
+    override    => length($override) > 0 ? 1 : 0,
     return_type => $return_type,
     name        => $name,
     arguments   => $arguments,

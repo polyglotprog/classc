@@ -114,11 +114,11 @@ sub __write_methods {
 
 sub __write_functions {
   $logger->trace(">> Writing functions");
-  my ($class, $class_name) = @_;
+  my ($class) = @_;
   say "\n/* Functions */";
   for my $method (@{ $class->{methods} }) {
     my $return_type   = $method->{return_type};
-    my $function_name = "${class_name}_$method->{name}";
+    my $function_name = "$method->{source}_$method->{name}";
     if (ends_with($return_type, ' *')) {
       say "$method->{return_type}$function_name($method->{arguments});";
     } else {

@@ -15,7 +15,14 @@ my %TYPE_DESCRIPTIONS = (
 
 sub new {
   my $class = shift;
-  my %self  = (@_);
+  my %self;
+  if (ref($_[0]) eq 'HASH') {
+    my $base = shift;
+    # %self = (%{$base}, @_);
+    %self = %$base;
+  } else {
+    %self = (@_);
+  }
   set_id(\%self, $self{id} // UNKNOWN());
   return bless \%self, $class;
 }
@@ -26,6 +33,8 @@ sub __fields {
     'id',
     'description',
     'source',
+    'implementor',
+    'override',
     'return_type',
     'name',
     'arguments',
